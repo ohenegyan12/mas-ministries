@@ -11,4 +11,8 @@ export const navigation = [
         id: 2,
         title: "Password",
     },
+    {
+        id: 3,
+        title: "Ministry Config",
+    },
 ];

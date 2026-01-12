@@ -24,7 +24,7 @@ const DonationsPage = () => {
                     isMedium
                     onClick={() => setIsAddModalOpen(true)}
                 >
-                    Add Zelle Donation
+                    Add Donation
                 </Button>
             </Breadcrumbs>
             <div className="mb-2 text-h4">❤️ Donations</div>

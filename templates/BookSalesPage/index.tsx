@@ -24,7 +24,7 @@ const BookSalesPage = () => {
                     isMedium
                     onClick={() => setIsAddModalOpen(true)}
                 >
-                    Add Zelle Book Sale
+                    Add Book Sale
                 </Button>
             </Breadcrumbs>
             <div className="mb-2 text-h4">📚 Book Sales</div>

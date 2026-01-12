@@ -1,14 +1,37 @@
+import { useState, useEffect } from "react";
 import Field from "@/components/Field";
 import Button from "@/components/Button";
+import Select from "@/components/Select";
 
 type Props = {
     onClose: () => void;
 };
 
+const paymentOptions = [
+    { id: 0, name: "Zelle" },
+    { id: 1, name: "Cash" },
+    { id: 2, name: "PayPal" },
+];
+
+const bookOptions = [
+    { id: 1, name: "The Blessed Life", price: 20 },
+    { id: 2, name: "Walking in Faith", price: 15 },
+    { id: 3, name: "Ministry Leadership", price: 25 },
+];
+
 const AddBookSaleModal = ({ onClose }: Props) => {
+    const [paymentMethod, setPaymentMethod] = useState(paymentOptions[0]);
+    const [selectedBook, setSelectedBook] = useState(bookOptions[0]);
+    const [quantity, setQuantity] = useState(1);
+    const [amount, setAmount] = useState(bookOptions[0].price);
+
+    useEffect(() => {
+        setAmount(selectedBook.price * quantity);
+    }, [selectedBook, quantity]);
+
     return (
         <form className="p-4" onSubmit={(e) => { e.preventDefault(); onClose(); }}>
-            <div className="mb-8 text-h4">Add Zelle Book Sale</div>
+            <div className="mb-8 text-h4">Add Book Sale</div>
             <div className="flex flex-col gap-4">
                 <div className="flex gap-4 max-md:flex-col">
                     <Field
@@ -26,10 +49,12 @@ const AddBookSaleModal = ({ onClose }: Props) => {
                     />
                 </div>
                 <div className="flex gap-4 max-md:flex-col">
-                    <Field
+                    <Select
                         className="flex-2"
                         label="Book title"
-                        placeholder="Select or enter book title"
+                        value={selectedBook as any}
+                        onChange={setSelectedBook as any}
+                        options={bookOptions as any}
                         required
                     />
                     <Field
@@ -37,15 +62,19 @@ const AddBookSaleModal = ({ onClose }: Props) => {
                         label="Quantity"
                         placeholder="1"
                         type="number"
+                        value={quantity}
+                        onChange={(e: any) => setQuantity(parseInt(e.target.value) || 0)}
                         required
                     />
                 </div>
                 <div className="flex gap-4 max-md:flex-col">
                     <Field
                         className="flex-1"
-                        label="Amount"
+                        label="Total Amount ($)"
                         placeholder="0.00"
                         type="number"
+                        value={amount}
+                        onChange={(e: any) => setAmount(parseFloat(e.target.value) || 0)}
                         required
                     />
                     <Field
@@ -56,15 +85,17 @@ const AddBookSaleModal = ({ onClose }: Props) => {
                     />
                 </div>
                 <div className="flex gap-4 max-md:flex-col">
-                    <Field
+                    <Select
                         className="flex-1"
                         label="Payment method"
-                        value="Zelle"
-                        disabled
+                        value={paymentMethod}
+                        onChange={(val: any) => setPaymentMethod(val)}
+                        options={paymentOptions}
+                        required
                     />
                     <Field
                         className="flex-1"
-                        label="Zelle reference / screenshot"
+                        label={`${paymentMethod.name} reference / screenshot`}
                         placeholder="ID or link"
                     />
                 </div>
@@ -87,3 +118,4 @@ const AddBookSaleModal = ({ onClose }: Props) => {
 };
 
 export default AddBookSaleModal;
+

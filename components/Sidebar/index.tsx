@@ -2,7 +2,6 @@ import { useState } from "react";
 import Link from "next/link";
 import Image from "@/components/Image";
 import Button from "@/components/Button";
-import Icon from "@/components/Icon";
 import Modal from "@/components/Modal";
 import SearchModal from "@/components/SearchModal";
 import Menu from "./Menu";

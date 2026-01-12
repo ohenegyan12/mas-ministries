@@ -1,6 +1,5 @@
 import Select from "@/components/Select";
 import Button from "@/components/Button";
-import Icon from "@/components/Icon";
 import { SelectOption } from "@/types/select";
 
 type Props = {

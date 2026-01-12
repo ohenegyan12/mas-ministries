@@ -1,14 +1,13 @@
 type Props = {
     className?: string;
     items: Array<string>;
-    children: React.ReactNode;
+    children?: React.ReactNode;
 };
 
 const Breadcrumbs = ({ className, items, children }: Props) => (
     <div
-        className={`flex justify-between items-center mb-6 max-md:block ${
-            className || ""
-        }`}
+        className={`flex justify-between items-center mb-6 max-md:block ${className || ""
+            }`}
     >
         <ul className="flex items-center max-md:hidden">
             {items.map((item, index) => (

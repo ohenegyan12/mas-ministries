@@ -1,17 +1,17 @@
 export const items = [
     {
-        title: "My Events",
-        icon: "music",
-        href: "/events/my-events",
+        title: "Donations",
+        icon: "coins",
+        href: "/donations",
     },
     {
-        title: "Ticket Sales",
-        icon: "ticket",
-        href: "/tickets/sales",
+        title: "Book Sales",
+        icon: "sale",
+        href: "/book-sales",
     },
     {
-        title: "My Balance",
-        icon: "wallet",
-        href: "/earnings",
+        title: "Settings",
+        icon: "gear",
+        href: "/settings",
     },
 ];

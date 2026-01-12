@@ -30,12 +30,7 @@ const ForgotPasswordPage = () => {
             >
                 Forgot Password
             </Button>
-            <div className="mt-8 text-center text-body-lg max-md:mt-5">
-                <div className="text-gray-500">Don’t have access anymore?</div>
-                <button className="font-medium text-primary-400 transition-colors hover:text-primary-600">
-                    Try another method
-                </button>
-            </div>
+
         </Login>
     );
 };

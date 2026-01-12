@@ -1,7 +1,5 @@
-import { useState } from "react";
 import Field from "@/components/Field";
 import Button from "@/components/Button";
-import Icon from "@/components/Icon";
 
 type Props = {
     onClose: () => void;

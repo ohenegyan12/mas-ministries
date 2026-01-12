@@ -2,7 +2,6 @@ import { useState } from "react";
 import Table from "@/components/Table";
 import TableRow from "@/components/TableRow";
 import Icon from "@/components/Icon";
-import { DonationType } from "@/types/table";
 
 import { tableContent } from "./content";
 

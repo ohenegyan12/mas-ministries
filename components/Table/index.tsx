@@ -44,9 +44,8 @@ const Table = ({
 
     return (
         <div
-            className={`border border-gray-100 rounded-2xl shadow-[0_0.0625rem_0.125rem_0_rgba(228,229,231,0.24)] ${
-                className || ""
-            }`}
+            className={`border border-gray-100 rounded-2xl shadow-[0_0.0625rem_0.125rem_0_rgba(228,229,231,0.24)] ${className || ""
+                }`}
         >
             <div className="flex items-center px-5 py-3 max-md:px-4">
                 <div className="mr-auto text-body-lg font-semibold">

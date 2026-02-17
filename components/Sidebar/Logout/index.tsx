@@ -1,10 +1,22 @@
+"use client";
+
+import { useState } from "react";
 import Button from "@/components/Button";
+import { authApi } from "@/lib/api";
 
 type Props = {
     onClose: () => void;
 };
 
 const Logout = ({ onClose }: Props) => {
+    const [isLoading, setIsLoading] = useState(false);
+
+    const handleLogout = async () => {
+        setIsLoading(true);
+        await authApi.logout();
+        // Redirect is handled inside authApi.logout()
+    };
+
     return (
         <div className="text-center">
             <div className="relative flex justify-center items-center size-21 mx-auto mb-4 max-md:size-14 max-md:mb-2">
@@ -30,16 +42,17 @@ const Logout = ({ onClose }: Props) => {
                     className="flex-1 max-md:flex-auto max-md:!h-10 !text-body-md"
                     isSecondary
                     onClick={onClose}
+                    disabled={isLoading}
                 >
                     Cancel
                 </Button>
                 <Button
                     className="flex-1 max-md:flex-auto max-md:!h-10 !text-body-md"
                     isRed
-                    as="link"
-                    href="/sign-in"
+                    onClick={handleLogout}
+                    disabled={isLoading}
                 >
-                    Yes, Logout
+                    {isLoading ? "Logging out..." : "Yes, Logout"}
                 </Button>
             </div>
         </div>

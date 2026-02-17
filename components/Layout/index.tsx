@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import Sidebar from "@/components/Sidebar";
 import Header from "@/components/Header";
 
@@ -8,14 +9,30 @@ type LayoutProps = {
 };
 
 const Layout = ({ title, children }: LayoutProps) => {
+    const router = useRouter();
     const [toggle, setToggle] = useState(false);
     const [visibleSidebar, setVisibleSidebar] = useState(false);
+    const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+    useEffect(() => {
+        const token = localStorage.getItem("token");
+        if (!token) {
+            router.push("/sign-in");
+        } else {
+            setIsAuthenticated(true);
+        }
+    }, [router]);
+
+    if (!isAuthenticated) {
+        return <div className="flex items-center justify-center min-h-screen bg-white">
+            <div className="w-10 h-10 border-4 border-primary-500 border-t-transparent rounded-full animate-spin"></div>
+        </div>;
+    }
 
     return (
         <div
-            className={`pt-18 max-md:pt-16.25 ${
-                toggle ? "pl-18" : "pl-69 max-xl:pl-0"
-            }`}
+            className={`pt-18 max-md:pt-16.25 ${toggle ? "pl-18" : "pl-69 max-xl:pl-0"
+                }`}
         >
             <Sidebar
                 toggle={toggle}
@@ -29,11 +46,10 @@ const Layout = ({ title, children }: LayoutProps) => {
                 onShow={() => setVisibleSidebar(true)}
             />
             <div
-                className={`hidden fixed inset-0 z-25 bg-gray-900/50 backdrop-blur-[0.125rem] transition-all duration-300 max-xl:block ${
-                    visibleSidebar
+                className={`hidden fixed inset-0 z-25 bg-gray-900/50 backdrop-blur-[0.125rem] transition-all duration-300 max-xl:block ${visibleSidebar
                         ? "visible opacity-100"
                         : "invisible opacity-0"
-                }`}
+                    }`}
                 onClick={() => {
                     setVisibleSidebar(false);
                 }}

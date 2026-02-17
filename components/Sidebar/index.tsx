@@ -32,7 +32,7 @@ const Sidebar = ({ toggle, visible, onToggle, onClose }: Props) => {
                         : "justify-between p-5 max-md:py-4"
                         }`}
                 >
-                    <Link className="flex items-center" href="/">
+                    <Link className="flex items-center" href="/dashboard">
                         <Image
                             className="w-8 opacity-100"
                             src="/logo-main.jpg"

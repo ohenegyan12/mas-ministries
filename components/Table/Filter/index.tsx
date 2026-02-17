@@ -7,48 +7,35 @@ import { useState } from "react";
 
 type Props = {
     isShortButton?: boolean;
+    status?: string;
+    setStatus?: (value: string) => void;
 };
 
-const Filter = ({ isShortButton }: Props) => {
+const Filter = ({ isShortButton, status, setStatus }: Props) => {
     const [amountStart, setAmountStart] = useState<number>(500);
     const [amountEnd, setAmountEnd] = useState<number>(12000);
     const [dateStart, setDateStart] = useState<string>("1 Dec 2024");
     const [dateEnd, setDateEnd] = useState<string>("31 Jun 2024");
-    const [checkboxes, setCheckboxes] = useState([
-        {
-            id: 0,
-            label: "Approved",
-            checked: false,
-            onChange: (value: boolean) => handleCheckboxChange(0, value),
-        },
-        {
-            id: 1,
-            label: "Pending",
-            checked: false,
-            onChange: (value: boolean) => handleCheckboxChange(1, value),
-        },
-        {
-            id: 2,
-            label: "Rejected",
-            checked: false,
-            onChange: (value: boolean) => handleCheckboxChange(2, value),
-        },
-    ]);
 
-    const handleCheckboxChange = (id: number, checked: boolean) => {
-        setCheckboxes((prev) =>
-            prev.map((item) => (item.id === id ? { ...item, checked } : item))
-        );
+    const statusOptions = [
+        { label: "Completed", value: "completed" },
+        { label: "Pending", value: "pending" },
+        { label: "Rejected", value: "rejected" },
+    ];
+
+    const handleStatusChange = (value: string, checked: boolean) => {
+        if (setStatus) {
+            setStatus(checked ? value : "");
+        }
     };
 
     return (
         <Popover>
             <PopoverButton
-                className={`group flex justify-center items-center h-10 border border-gray-100 rounded-[0.625rem] shadow-xs text-body-md font-medium text-gray-500 cursor-pointer outline-none transition-colors hover:text-gray-900 data-open:bg-gray-25 data-open:text-gray-900 ${
-                    isShortButton
-                        ? "w-10 !text-0"
-                        : " px-2.75 gap-2 max-md:!gap-0 max-md:!w-10 max-md:!px-0 max-md:!text-0"
-                }`}
+                className={`group flex justify-center items-center h-10 border border-gray-100 rounded-[0.625rem] shadow-xs text-body-md font-medium text-gray-500 cursor-pointer outline-none transition-colors hover:text-gray-900 data-open:bg-gray-25 data-open:text-gray-900 ${isShortButton
+                    ? "w-10 !text-0"
+                    : " px-2.75 gap-2 max-md:!gap-0 max-md:!w-10 max-md:!px-0 max-md:!text-0"
+                    }`}
             >
                 <Icon
                     className="!size-4 fill-gray-400 transition-colors group-hover:fill-gray-900 group-[[data-open]]:fill-gray-900"
@@ -111,12 +98,12 @@ const Filter = ({ isShortButton }: Props) => {
                         <div className="">
                             <div className="mb-2 font-semibold">Status</div>
                             <div className="flex flex-col items-start gap-2">
-                                {checkboxes.map((checkbox) => (
+                                {statusOptions.map((option) => (
                                     <Checkbox
-                                        label={checkbox.label}
-                                        checked={checkbox.checked}
-                                        onChange={checkbox.onChange}
-                                        key={checkbox.id}
+                                        label={option.label}
+                                        checked={status === option.value}
+                                        onChange={(checked) => handleStatusChange(option.value, checked)}
+                                        key={option.value}
                                     />
                                 ))}
                             </div>

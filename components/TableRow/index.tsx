@@ -6,6 +6,7 @@ type RowProps = {
     onRowSelect?: (enabled: boolean) => void;
     children: React.ReactNode;
     index?: number;
+    onClick?: React.MouseEventHandler<HTMLTableRowElement>;
 };
 
 const Row = ({
@@ -14,12 +15,13 @@ const Row = ({
     onRowSelect,
     children,
     index,
+    onClick,
 }: RowProps) => {
     return (
         <tr
-            className={`[&_td]:h-16 [&_td]:py-3 [&_td]:border-b [&_td]:border-gray-100 ${
-                className || ""
-            }`}
+            className={`[&_td]:h-16 [&_td]:py-3 [&_td]:border-b [&_td]:border-gray-100 ${className || ""
+                }`}
+            onClick={onClick}
         >
             {onRowSelect && (
                 <td className="">
